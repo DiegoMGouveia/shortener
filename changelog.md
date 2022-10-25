@@ -3,6 +3,19 @@
 24/10/2 Inicio do projeto encurtador de links.
 toda alteraçkão será documentada neste arquivo
 
+
+
+## [0.0.2] - 2022-10-xx xx:xx
+ 
+### Added
+
+
+
+### Removed
+
+### Changed 
+
+
 ## [0.0.1] - 2022-10-24 21:02
  
 ### Added

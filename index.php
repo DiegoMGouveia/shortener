@@ -2,6 +2,8 @@
     require_once "class/classes.php"; // requerimento das classes
     require_once "functions/function.php"; // requerimento das funções
 
+    session_start();
+    
     
     
 ?>
