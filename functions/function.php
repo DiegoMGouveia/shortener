@@ -27,14 +27,21 @@
     {
         try {
 
+            $url = "https://diegouveia.tk/";
+            $data = date('d M Y H:i');
+            $short = "IJSHIA";
+            $manage = "HISHISHISUHSIHS";
+            $clicks = 0;
+            $countEnd = 0;
+
             $conection = connection();
             $stmt = $conection->prepare('INSERT INTO links(url,data,short,manage,clicks,countend) VALUES(:url, :data, :short, :manage, :clicks, :countend)');
-            $stmt->bindValue(':url', $serviceObj->getName());
-            $stmt->bindValue(':data', $serviceObj->getPrice());
-            $stmt->bindValue(':short', $serviceObj->getDescription());
-            $stmt->bindValue(':manage', $serviceObj->getImage());
-            $stmt->bindValue(':clicks', $serviceObj->getImage());
-            $stmt->bindValue(':countend', $serviceObj->getImage());
+            $stmt->bindValue(':url', $url);
+            $stmt->bindValue(':data', $data);
+            $stmt->bindValue(':short', $short);
+            $stmt->bindValue(':manage', $manage);
+            $stmt->bindValue(':clicks', $clicks);
+            $stmt->bindValue(':countend', $countEnd);
             $stmt->execute();
             
             return true;
