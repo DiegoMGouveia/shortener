@@ -3,18 +3,18 @@
     {
         private $id; // ID do objeto
         private $url; //url digitado pelo usuário
-        private $data; // data em que o link foi encurtado
+        private $date; // date em que o link foi encurtado
         private $short; // link curto
         private $manage; // link para editar as configurações do link
-        private $clicks; // quantidades de clicks realizados
-        private $countEnd; // quantidade de clicks para encerrar o encurtador
+        private $clicks = 0; // quantidades de clicks realizados
+        private $countEnd = 0; // quantidade de clicks para encerrar o encurtador
 
-        public function __construct($id=null, $url=null, $data=null, $short=null, $manage=null, $clicks=0, $countEnd=null)
+        public function __construct($id=null, $url=null, $date=null, $short=null, $manage=null, $clicks=0, $countEnd=null)
         {
 
             $this->id = $id;
             $this->url = $url;
-            $this->data = $data;
+            $this->date = $date;
             $this->short = $short;
             $this->manage = $manage;;
             $this->clicks = $clicks;
@@ -59,28 +59,30 @@
          */ 
         public function setUrl($url)
         {
+                $newDate = date('Y-m-d H:i:s');
                 $this->url = $url;
+                $this->setDate($newDate);
                 
 
                 return $this;
         }
 
         /**
-         * Get the value of data
+         * Get the value of date
          */ 
-        public function getData()
+        public function getDate()
         {
-                return $this->data;
+                return $this->date;
         }
 
         /**
-         * Set the value of data
+         * Set the value of date
          *
          * @return  self
          */ 
-        public function setData($data)
+        public function setDate($date)
         {
-                $this->data = $data;
+                $this->date = $date;
 
                 return $this;
         }
@@ -184,13 +186,5 @@
             return $this;
         }
 
-        // A função newDate atribui a data e hora atual na propriedade $date
-        public function newDate()
-        {
-            $this->date = date("d/m/Y h:i:s");
-
-            return $this;
-
-        }
 
     }

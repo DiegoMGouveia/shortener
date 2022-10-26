@@ -3,22 +3,6 @@
     require_once "functions/function.php"; // requerimento das funções
 
     session_start();
-
-    if(isset($_GET["short"])) //verifica se o usuário esta vindo de um redirecionamento com o GET "short"
-    {   
-        $sCheck = getShort(); //se tiver, irá buscar o link relacionado ao valor atribuido ao GET e setar o link na variavel $sCheck, 
-                                  //caso não tenha um link relacionado ao código, retornará false.
-
-        if ($sCheck != false)
-        {
-            
-            
-            echo "<div class='container text-center'>Obrigado por usar nosso encurtador de links! <br> <a href='{$sCheck}' target='_blank'><button type='button' class='btn btn-primary'>clique aqui</button></a> para acessar o site</div>";
-
-        }
-        
-    }
-
     
     
     
@@ -34,6 +18,8 @@
 </head>
 <body>
 
+
+
 <?php
     
 
@@ -47,9 +33,6 @@
         
         }
     }
-    
-    if ( !isset( $_GET["short"]))
-    {
     ?>
 
     <div class="container centered text-center">
@@ -57,7 +40,7 @@
         <div class="row">
             <div class="col mt-5">
                 <!-- inicio formulário -->
-                <form action="#" method="post">
+                <form action="?" method="post">
                     <label for="insertlink" class="mb-2">
                         Insira o link:
                     </label>
@@ -71,37 +54,15 @@
     </div>
 
     <?php
-    } else
-    {
-        if ( $short == true ) // precisa alterar
+        if ( isset ( $short ))
         {
-            ?>
-            <div class="mt-2 container col-2">
-                <table class="table table-striped table-success border">
-                    <thead>
-                    <tr class="table-success">
-                        <th scope="col">  </th>
-                        <th scope="col">  </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr class="table-light">
-                        <th scope="row">Link Encurtado</th>
-                        <td><?php echo $url->getShort()?></td>
-                    </tr>
-                    <tr class="table-light">
-                        <th scope="row">Gerenciar Link</th>
-                        <td><?php echo $url->getManage()?></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <?php
-        } else
-        {
-            echo "<div class='container border-success bg-danger border border-dark py-3 mx-auto border-opacity-30 text-center'> Link não encontrado.</div>";
+            if ( $short == true )
+            {
+                ?>
+                
+                <?php
+            }
         }
-    }
     ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>
