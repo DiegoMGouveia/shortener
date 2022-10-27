@@ -15,6 +15,11 @@
             
             echo "<div class='container text-center'>Obrigado por usar nosso encurtador de links! <br> <a href='{$sCheck}' target='_blank'><button type='button' class='btn btn-primary'>clique aqui</button></a> para acessar o site</div>";
 
+        }else
+        {
+    
+            echo "<div class='container border-success bg-danger border border-dark py-3 mx-auto border-opacity-30 text-center'> Link não encontrado.</div>";
+    
         }
         
     }
@@ -43,37 +48,38 @@
         {
          
             $url = setLink($_POST["insertlink"]); //retorna o objeto da Url encurtada
-            $short = shortLink($url);
+
+            $short = shortLink($url); // armazena os dados do objeto no banco de dados, se tudo estiver certo, retornará true
         
         }
     }
     
     if ( !isset( $_GET["short"]))
     {
-    ?>
+        ?>
 
-    <div class="container centered text-center">
-        <span class="h1 fw-bold">Encurtador de links</span>
-        <div class="row">
-            <div class="col mt-5">
-                <!-- inicio formulário -->
-                <form action="#" method="post">
-                    <label for="insertlink" class="mb-2">
-                        Insira o link:
-                    </label>
-                    <!-- input url -->
-                    <input type="url" name="insertlink" id="insertlink" class="form-control border-success border border-success p-1 border-opacity-30 text-center">
-                    <button type="submit" class="border border-success p-1 border-opacity-10 rounded mt-2" name="sendUrl">Encurtar</button>
-                </form>
-                <!-- fim formulário -->
-            </div>
+        <div class="container centered text-center">
+            <span class="h1 fw-bold">Encurtador de links</span>
+            <div class="row">
+                <div class="col mt-5">
+                    <!-- inicio formulário -->
+                    <form action="#" method="post">
+                        <label for="insertlink" class="mb-2">
+                            Insira o link:
+                        </label>
+                        <!-- input url -->
+                        <input type="url" name="insertlink" id="insertlink" class="form-control border-success border border-success p-1 border-opacity-30 text-center">
+                        <button type="submit" class="border border-success p-1 border-opacity-10 rounded mt-2" name="sendUrl">Encurtar</button>
+                    </form>
+                    <!-- fim formulário -->
+                </div>
+                
+            </div><!-- row -->
         </div>
-    </div>
 
-    <?php
-    } else
-    {
-        if ( $short == true ) // precisa alterar
+        <?php
+    
+        if ( $short == true ) // se o $short for true, mostrará os dados que foram salvos no banco de dados
         {
             ?>
             <div class="mt-2 container col-2">
@@ -97,9 +103,10 @@
                 </table>
             </div>
             <?php
+        
         } else
         {
-            echo "<div class='container border-success bg-danger border border-dark py-3 mx-auto border-opacity-30 text-center'> Link não encontrado.</div>";
+            echo "Houve um erro, tente novamente";
         }
     }
     ?>

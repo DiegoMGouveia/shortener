@@ -27,13 +27,6 @@
     {
         try {
 
-            // $url = "https://diegouveia.tk/";
-            // $data = date('Y-m-d h:m:s');
-            // $short = "IJSHIA";
-            // $manage = "HISHISHISUHSIHS";
-            // $clicks = 0;
-            // $countEnd = 0;
-
             $connection = connection();
             $stmt = $connection->prepare('INSERT INTO links(url,date,short,manage,clicks,countend) VALUES(:url, :date, :short, :manage, :clicks, :countend)');
             $stmt->bindValue(':url', $link->getUrl());
