@@ -29,7 +29,7 @@
     
 ?>
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" class="bg-dark">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -37,7 +37,7 @@
     <title>Shortner - Encurtador de links</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
-<body>
+<body class="bg-dark">
 
 <?php
     
@@ -58,8 +58,8 @@
     {
         ?>
 
-        <div class="container centered text-center">
-            <span class="h1 fw-bold">Encurtador de links</span>
+        <div class="mt-5 container bg-light border border-1 border-danger border-opacity-20 rounded-5 p-2 centered text-center">
+            <span class="h1 text-danger fw-bold">Encurtador de links</span>
             <div class="row">
                 <div class="col mt-5">
                     <!-- inicio formulário -->
@@ -68,8 +68,8 @@
                             Insira o link:
                         </label>
                         <!-- input url -->
-                        <input type="url" name="insertlink" id="insertlink" class="form-control border-success border border-success p-1 border-opacity-30 text-center">
-                        <button type="submit" class="border border-success p-1 border-opacity-10 rounded mt-2" name="sendUrl">Encurtar</button>
+                        <input type="url" name="insertlink" id="insertlink" placeholder="cole o link aqui" class="form-control border-success border border-success p-1 border-opacity-30 text-center">
+                        <button type="submit" class="border border-success bg-primary p-1 border-opacity-10 rounded-3 mt-2" name="sendUrl">Encurtar</button>
                     </form>
                     <!-- fim formulário -->
                 </div>
@@ -79,37 +79,41 @@
 
         <?php
     
-        if ( $short == true ) // se o $short for true, mostrará os dados que foram salvos no banco de dados
+        if (isset($short))
         {
-            ?>
-            <div class="mt-2 container col-2">
-                <table class="table table-striped table-success border">
-                    <thead>
-                    <tr class="table-success">
-                        <th scope="col">  </th>
-                        <th scope="col">  </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr class="table-light">
-                        <th scope="row">Link Encurtado</th>
-                        <td><?php echo $url->getShort()?></td>
-                    </tr>
-                    <tr class="table-light">
-                        <th scope="row">Gerenciar Link</th>
-                        <td><?php echo $url->getManage()?></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <?php
-        
-        } else
-        {
-            echo "Houve um erro, tente novamente";
+            if ( $short == true ) // se o $short for true, mostrará os dados que foram salvos no banco de dados
+            {
+                ?>
+                <div class="mt-2 container col-2">
+                    <table class="table table-striped table-success border">
+                        <thead>
+                        <tr class="table-success">
+                            <th scope="col">  </th>
+                            <th scope="col">  </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="table-light">
+                            <th scope="row">Link Encurtado</th>
+                            <td><?php echo "<input type='text'  id='link' value='https://127.0.0.1/shortner/?short={$url->getShort()}'><button onClick='copiarTexto()'>Copiar link</button>"?></td>
+                        </tr> 
+                        <tr class="table-light">
+                            <th scope="row">Gerenciar Link</th>
+                            <td><?php echo $url->getManage()?></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <?php
+            
+            } else
+            {
+                echo "Houve um erro, tente novamente";
+            }
         }
     }
     ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
