@@ -84,25 +84,20 @@
             if ( $short == true ) // se o $short for true, mostrará os dados que foram salvos no banco de dados
             {
                 ?>
-                <div class="mt-2 container col-2">
-                    <table class="table table-striped table-success border">
-                        <thead>
-                        <tr class="table-success">
-                            <th scope="col">  </th>
-                            <th scope="col">  </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr class="table-light">
-                            <th scope="row">Link Encurtado</th>
-                            <td><?php echo "<input type='text'  id='link' value='https://127.0.0.1/shortner/?short={$url->getShort()}'><button onClick='copiarTexto()'>Copiar link</button>"?></td>
-                        </tr> 
-                        <tr class="table-light">
-                            <th scope="row">Gerenciar Link</th>
-                            <td><?php echo $url->getManage()?></td>
-                        </tr>
-                        </tbody>
-                    </table>
+                <div class="mt-4 text-center container col-7 ">
+                    <div class="container">
+
+                        <div class="row border border-dager bg-light border border-1 border-danger border-opacity-20 rounded-5 ">
+                            <div class="col">
+                                Link Encurtado: <?php echo "<input type='text' class='form-control text-center' id='link' value='https://127.0.0.1/shortner/?short={$url->getShort()}'><button onClick='copiarTexto()'>Copiar link</button>"?>
+                                <br>
+                                <!-- Gerenciar Link: <?php // echo "<input type='text' class='form-control text-center' id='link' value='https://127.0.0.1/shortner/?shortmanage={$url->getManage()}'><button onClick='copiarTexto()'>Copiar link</button>"?> -->
+                            </div>
+
+                        </div>
+                    
+                    
+                    </div>
                 </div>
                 <?php
             
