@@ -5,10 +5,9 @@ toda alteraçkão será documentada neste arquivo
 
 
 
-## [0.0.2] - 2022-10-xx xx:xx
+## [0.1.0] - 2022-10-27 22:04
  
 ### Added
-
 
 
 ### Removed

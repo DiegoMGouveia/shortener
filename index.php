@@ -4,28 +4,6 @@
 
     session_start();
 
-    if(isset($_GET["short"])) //verifica se o usuário esta vindo de um redirecionamento com o GET "short"
-    {   
-        $sCheck = getShort(); //se tiver, irá buscar o link relacionado ao valor atribuido ao GET e setar o link na variavel $sCheck, 
-                                  //caso não tenha um link relacionado ao código, retornará false.
-
-        if ($sCheck != false)
-        {
-            
-            
-            echo "<div class='container text-center'>Obrigado por usar nosso encurtador de links! <br> <a href='{$sCheck}' target='_blank'><button type='button' class='btn btn-primary'>clique aqui</button></a> para acessar o site</div>";
-
-        }else
-        {
-    
-            echo "<div class='container border-success bg-danger border border-dark py-3 mx-auto border-opacity-30 text-center'> Link não encontrado.</div>";
-    
-        }
-        
-    }
-
-    
-    
     
 ?>
 <!DOCTYPE html>
@@ -54,7 +32,71 @@
         }
     }
     
-    if ( !isset( $_GET["short"]))
+
+    if(isset($_GET["short"])) //verifica se o usuário esta vindo de um redirecionamento com o GET "short"
+    {   
+        $sCheck = getShort(); //se tiver, irá buscar o link relacionado ao valor atribuido ao GET e setar o link na variavel $sCheck, 
+                                  //caso não tenha um link relacionado ao código, retornará false.
+
+        if ($sCheck != false)
+        {
+            
+            
+            echo "<div class='container text-center text-light'>Obrigado por usar nosso encurtador de links! <br> <a href='{$sCheck}' target='_blank'><button type='button' class='btn btn-primary'>clique aqui</button></a> para acessar o site</div>";
+
+        }else
+        {
+    
+            echo "<div class='container border-success bg-danger border border-dark py-3 mx-auto border-opacity-30 text-center'> Link não encontrado.</div>";
+    
+        }
+        
+    }
+
+    if ( isset ( $_GET["shortmanage"])) // se o usuário tentar acessar a area administrativa do link através do GET "shortmanage"
+    {
+        $manageShort = getShortManage();
+        
+        if (isset($manageShort->url))
+        {
+            if (strlen($manageShort->getUrl())>10) {
+                $urlsmall=substr($manageShort->getUrl(),0,10);
+                }
+            
+            ?>
+            
+            <div class="container col-7">
+                <div class="h1 text-center text-bg-warning rounded-bottom">
+                    Informações gerais do Link:
+                </div>
+            </div>
+            <div class="container col-3 text-center">
+            
+                <div class="row text-bg-light border border-warning p-0">
+
+                    <span class="text-dark fw-bold">URL:</span> <span> <a href="<?php echo $manageShort->getUrl() ?>" target="_blank" rel="noopener noreferrer"><?php echo $urlsmall . "..." ?></a></span>
+
+                </div>
+
+                <div class="row text-bg-light border border-warning border-top-0 p-0">
+
+                    <span class="text-dark fw-bold">Total de Clicks:</span> <span> <?php echo $manageShort->getClicks() ?></span>
+
+                </div>
+                
+                <div class="row text-bg-light border border-warning border-top-0 p-0">
+
+                    <span class="text-dark fw-bold">Clicks para quebrar o link:</span> <span> <?php echo $manageShort->getCountEnd() ?></span>
+
+                </div>
+            </div>
+
+            <?php
+        }
+    }
+
+
+    if ( !isset( $_GET["short"]) && !isset($_GET["shortmanage"])) // se o GET "short" não foi setado, mostrará o input de encurtamento de link
     {
         ?>
 
@@ -79,19 +121,19 @@
 
         <?php
     
-        if (isset($short))
+        if (isset($short)) // se o objeto foi armazenado no banco de dados, a variavel $short foi setada
         {
             if ( $short == true ) // se o $short for true, mostrará os dados que foram salvos no banco de dados
             {
                 ?>
-                <div class="mt-4 text-center container col-7 ">
-                    <div class="container">
+                <div class="mt-4 text-center container col-7">
+                    <div class="container bg-primary">
 
-                        <div class="row border border-dager bg-light border border-1 border-danger border-opacity-20 rounded-5 ">
+                        <div class="row border bg-light border border-1 border-danger border-opacity-20 rounded-5">
                             <div class="col">
-                                Link Encurtado: <?php echo "<input type='text' class='form-control text-center' id='link' value='https://127.0.0.1/shortner/?short={$url->getShort()}'><button onClick='copiarTexto()'>Copiar link</button>"?>
+                                Link Encurtado: <?php echo "<input type='text' class='form-control text-center' id='link' value='http://127.0.0.1/shortener/?short={$url->getShort()}'><button onClick='copiarShort()' class='btn btn-outline-dark mb-3'>Copiar link</button>"?>
                                 <br>
-                                <!-- Gerenciar Link: <?php // echo "<input type='text' class='form-control text-center' id='link' value='https://127.0.0.1/shortner/?shortmanage={$url->getManage()}'><button onClick='copiarTexto()'>Copiar link</button>"?> -->
+                                Gerenciar Link: <?php echo "<input type='text' class='form-control text-center' id='link2' value='http://127.0.0.1/shortener/?shortmanage={$url->getManage()}'><button onClick='copiarManage()' class='btn btn-outline-dark mb-3'>Copiar link</button>"?>
                             </div>
 
                         </div>
@@ -107,6 +149,7 @@
             }
         }
     }
+    
     ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     <script src="js/script.js"></script>

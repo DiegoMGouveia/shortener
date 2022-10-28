@@ -2,10 +2,10 @@
     class Link
     {
         private $id; // ID do objeto
-        private $url; //url digitado pelo usuário
+        public $url; //url digitado pelo usuário
         private $date; // date em que o link foi encurtado
         private $short; // link curto
-        private $manage; // link para editar as configurações do link
+        public $manage; // link para editar as configurações do link
         private $clicks = 0; // quantidades de clicks realizados
         private $countEnd = 0; // quantidade de clicks para encerrar o encurtador
 

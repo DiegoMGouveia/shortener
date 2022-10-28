@@ -135,3 +135,27 @@
             return false;
         }
     }
+
+    
+    function getShortManage()
+    {
+        $query = 'SELECT * FROM links WHERE manage = :search ';
+        $connection = connection();
+        $stmt = $connection->prepare($query);
+        $stmt->bindValue(':search', $_GET["shortmanage"]);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+        if (count($result) === 1) // se não houver o código no banco de dados, retornará true.
+        {
+
+
+            $manageObj = new Link($result[0]->id, $result[0]->url, $result[0]->date, $result[0]->short, $result[0]->manage, $result[0]->clicks, $result[0]->countend);
+
+            return $manageObj;
+
+        } else
+        {
+            return false;
+        }
+    }
