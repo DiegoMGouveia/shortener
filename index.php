@@ -22,14 +22,7 @@
 
     if ( isset( $_POST["sendUrl"] ) ) // se o usuário clicar no botão "Encurtar"
     {
-        if ( isset ($_POST["insertlink"]) ) // verifica se o usuário digitou um link
-        {
-         
-            $url = setLink($_POST["insertlink"]); //retorna o objeto da Url encurtada
-
-            $short = shortLink($url); // armazena os dados do objeto no banco de dados, se tudo estiver certo, retornará true
-        
-        }
+        require_once("requires/sendurl.php"); // requerimento do código se o usuário clicar no botão "sendUrl"
     }
     
 
@@ -38,13 +31,13 @@
         $sCheck = getShort(); //se tiver, irá buscar o link relacionado ao valor atribuido ao GET e setar o link na variavel $sCheck, 
                                   //caso não tenha um link relacionado ao código, retornará false.
 
-        if ($sCheck != false)
+        if ($sCheck != false) // se a variavel $sCheck não for false 
         {
             
             
             echo "<div class='container text-center text-light'>Obrigado por usar nosso encurtador de links! <br> <a href='{$sCheck}' target='_blank'><button type='button' class='btn btn-primary'>clique aqui</button></a> para acessar o site</div>";
 
-        }else
+        }else //se for false retornará uma mensagem de erro.
         {
     
             echo "<div class='container border-success bg-danger border border-dark py-3 mx-auto border-opacity-30 text-center'> Link não encontrado.</div>";
@@ -55,44 +48,7 @@
 
     if ( isset ( $_GET["shortmanage"])) // se o usuário tentar acessar a area administrativa do link através do GET "shortmanage"
     {
-        $manageShort = getShortManage();
-        
-        if (isset($manageShort->url))
-        {
-            if (strlen($manageShort->getUrl())>10) {
-                $urlsmall=substr($manageShort->getUrl(),0,10);
-                }
-            
-            ?>
-            
-            <div class="container col-7">
-                <div class="h1 text-center text-bg-warning rounded-bottom">
-                    Informações gerais do Link:
-                </div>
-            </div>
-            <div class="container col-3 text-center">
-            
-                <div class="row text-bg-light border border-warning p-0">
-
-                    <span class="text-dark fw-bold">URL:</span> <span> <a href="<?php echo $manageShort->getUrl() ?>" target="_blank" rel="noopener noreferrer"><?php echo $urlsmall . "..." ?></a></span>
-
-                </div>
-
-                <div class="row text-bg-light border border-warning border-top-0 p-0">
-
-                    <span class="text-dark fw-bold">Total de Clicks:</span> <span> <?php echo $manageShort->getClicks() ?></span>
-
-                </div>
-                
-                <div class="row text-bg-light border border-warning border-top-0 p-0">
-
-                    <span class="text-dark fw-bold">Clicks para quebrar o link:</span> <span> <?php echo $manageShort->getCountEnd() ?></span>
-
-                </div>
-            </div>
-
-            <?php
-        }
+        require_once("requires/shortmanage.php"); // requerimento da logica da página de manutenção do link encurtado (shortmanage)
     }
 
 

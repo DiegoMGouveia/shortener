@@ -5,15 +5,21 @@ toda alteraçkão será documentada neste arquivo
 
 
 
-## [0.1.0] - 2022-10-27 22:04
+## [0.1.0] - 2022-10-xx xx:xx
  
 ### Added
+
+
+- Nova pasta "/requires" que armazenará partes do código que serão requeridos pelo usuário.
+- Novo arquivo "requires/shortmanage.php" que armazena a o código da página se o usuário enviar um GET "shortmanage"
 
 
 ### Removed
 
 ### Changed 
 
+
+- o index.php agora esta com sua estrutura de código separada por áreas de atuação, para facilitar a leitura e a manutenção do código.
 
 ## [0.0.1] - 2022-10-24 21:02
  
